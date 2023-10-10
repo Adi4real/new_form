@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta hGttp-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ID Card Generator</title>
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="style1.css" />
+  </head>
+  <body>
+    <section class="container">
+      <header>Doctor Registration Form</header>
+      <form action="#" class="form" id="form" method="post" autocomplete="off">
+        <div class="input-box">
+          <label>Full Name</label>
+          <input type="text" id="NAME" placeholder="Enter full name" required />
+        </div>
+
+        <div class="input-box">
+          <label>Email Address</label>
+          <input type="text" id="MAIL" placeholder="Enter email address" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Phone Number</label>
+            <input type="tel" id="PHONE" placeholder="Enter phone number" required />
+          </div>
+          
+        </div>
+        <div class="gender-box">
+          <h3>Gender</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input type="radio" id="check-male" name="gender" value="Male" />
+              <label for="check-male">Male</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-female" name="gender" value="Female" />
+              <label for="check-female">Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="input-box address">
+        
+          <div class="column">
+            <input type="text" id="CITY" placeholder="Enter your city" required />
+          </div>
+        </div>
+
+        <div class="input-box">
+            <label>Specialization</label>
+            <input type="text" id="SPECIALIZATION" placeholder="Enter field of Specialization" required />
+          </div>
+
+        <br>
+        <div class="info">License Photo: <input type="file" id="photo" accept="image/*"></div>
+        
+        <!-- Your submit button -->
+        <button type="button" onclick="submitDoctor()">Submit</button>
+      </form>
+      <br>
+      <a href="ID.html">View Registered Doctors</a>
+    </section>
+
+    <script>
+        function submitDoctor() {
+    // Get the values from the form fields
+    const name_value = document.getElementById('NAME').value;
+    const mail_value = document.getElementById('MAIL').value;
+    const phone_value = document.getElementById('PHONE').value;
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const gender_value = gender ? gender.value : null;
+    const city_value = document.getElementById('CITY').value;
+    const specialization_value = document.getElementById('SPECIALIZATION').value;
+
+    // Create a new doctor object
+    const newDoctor = {
+        name: name_value,
+        email: mail_value,
+        phone: phone_value,
+        gender: gender_value,
+        city: city_value,
+        specialization: specialization_value
+    };
+
+    // Retrieve existing doctors from local storage or initialize an empty array
+    const doctors = JSON.parse(localStorage.getItem('doctors')) || [];
+
+    // Add the new doctor to the list
+    doctors.push(newDoctor);
+
+    // Store the updated list of doctors back in local storage
+    localStorage.setItem('doctors', JSON.stringify(doctors));
+
+    // Clear the form fields
+    document.getElementById('form').reset();
+}
+      </script>
+      
+      
+  </body>
+</html>
